@@ -1,0 +1,3 @@
+secrets.*
+.devcontainer
+__pycache__/
