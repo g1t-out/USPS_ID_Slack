@@ -1,6 +1,6 @@
 # USPS_ID_Slack
 
-The purpose of this script is to read a specific folder in an email account (via IMAP) and to take the attachments from that email and post them to Slack. In my case, I'm using it on the USPS Informed Delivery emails which then attaches images of my incoming mail in a Slack channel. This can be used for any type of file, but I've only tested it with PNG and PDFs, both of which worked. Now I know that I can just setup forwarding rules to send these emails to whoever needs to receive them, but it isn't as cool as posting them to Slack.
+The purpose of this script is to read a specific folder in an email account (via IMAP) and to take the attachments from any emails in that folder and post them to Slack. In my case, I'm using it on the USPS Informed Delivery emails which then posts images of my physical mail in a Slack channel. This can be used for any type of file, but I've only tested it with PNG and PDFs, both of which worked. Now I know that I can just setup forwarding rules to send these emails to whoever needs to receive them, but it isn't as cool as posting them to Slack.
 
 ## Necessary Environment Variables
 
