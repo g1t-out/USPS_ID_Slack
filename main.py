@@ -1,5 +1,4 @@
 import FetchEmail
-import secrets
 import slack_sdk
 import os
 from slack_sdk import WebClient
@@ -13,22 +12,29 @@ def post_slack_image(attachment: str, initialComment: str = "") -> None:
     If Initial Comment is set, it will post that
     """
     if initialComment != "":
-        result = slackClient.files_upload(
-            channels=secrets.slack_channels,
+        result = slackClient.files_upload_v2(
+            channel=slack_channel,
             initial_comment=initialComment,
             file=attachment,
         )
+        assert result["file"]
     else:
-        result = slackClient.files_upload(
-            channels=secrets.slack_channels,
+        result = slackClient.files_upload_v2(
+            channel=slack_channel,
             file=attachment,
         )
+        assert result["file"]
 
+serverName = os.environ['serverName']
+username = os.environ['username']
+password = os.environ['password']
+usps_folder = os.environ['usps_folder']
+archive_folder = os.environ['archive_folder']
+slack_token = os.environ['slack_token']
+slack_channel = os.environ['slack_channel']
 
-slack_token = secrets.slack_token
-
-imapConnection = FetchEmail.FetchEmail(secrets.serverName,secrets.username,secrets.password)
-imapConnection.select_folder(secrets.usps_folder)
+imapConnection = FetchEmail.FetchEmail(serverName,username,password)
+imapConnection.select_folder(usps_folder)
 
 messages = imapConnection.fetch_messages()
 
@@ -44,7 +50,7 @@ for message in messages:
             post_slack_image(attachment,post)
         else:
             post_slack_image(attachment)
-    imapConnection.move_message(message,secrets.archive_folder)
+    imapConnection.move_message(message,archive_folder)
 
 imapConnection.connection.close()
 

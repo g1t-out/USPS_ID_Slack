@@ -1,0 +1,7 @@
+serverName=yourmailserver.com
+username=yourusername@yourmailserver.com
+password=yourpassword
+usps_folder=thefoldertowatch
+archive_folder=thefoldertoarchive
+slack_token=theslacktoken
+slack_channels=theslackchannelID
